@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.project</groupId>
+	<artifactId>climasync</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>climasync</name>
+	<description>Plataforma de Integração para Captura e Distribuição de Dados Meteorológicos 
+</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>1.8</java.version>
+
+	</properties>
+	
+	<dependencies>
+			<!--  Spring MVC  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!--  Dev Tools  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!--  JPA  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!--  MySQL  -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			    <version>8.0.33</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!--  Test JUNIT -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.13.2</version>
+		    <scope>test</scope>
+		</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.30</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+			  <groupId>org.modelmapper</groupId>
+			  <artifactId>modelmapper</artifactId>
+			  <version>3.0.0</version>
+			</dependency>
+			
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+					<!--  H2 TEST -->
+			<dependency>
+			    <groupId>com.h2database</groupId>
+			    <artifactId>h2</artifactId>
+			    <version>2.2.224</version>
+			    <scope>test</scope>
+			</dependency>
+			
+			<!--  Swagger  -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20230618</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
+			<version>4.9.0</version>
+		</dependency>
+		<!--  Camel dependecies  -->
+		 <dependency>
+		        <groupId>org.apache.camel</groupId>
+		        <artifactId>camel-core</artifactId>
+		        <version>4.9.0</version>
+		    </dependency>
+		    <dependency>
+		        <groupId>org.apache.camel</groupId>
+		        <artifactId>camel-http</artifactId>
+		        <version>4.9.0</version>
+		    </dependency>
+		    <dependency>
+		        <groupId>org.apache.camel</groupId>
+		        <artifactId>camel-jdbc</artifactId>
+		        <version>4.9.0</version>
+		    </dependency>
+		    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jsonpath</artifactId>
+        <version>4.9.0</version> <!-- Substitua pela versão do Camel usada no projeto -->
+    </dependency>
+		    <dependency>
+		        <groupId>org.apache.camel</groupId>
+		        <artifactId>camel-sql</artifactId>
+		        <version>4.9.0</version>
+		    </dependency>
+		    <dependency>
+		        <groupId>org.apache.camel</groupId>
+		        <artifactId>camel-servlet</artifactId>
+		        <version>4.9.0</version>
+		       </dependency>
+			<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!--  Convert Json to Xml -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20210307</version>
+		</dependency>
+		
+		<!--  Biblioteca para gerar xsd -->
+		<dependency>
+		    <groupId>org.glassfish.jaxb</groupId>
+		    <artifactId>jaxb-xjc</artifactId>
+		    <version>2.3.3</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

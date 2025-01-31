@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="SixteenDayForecast">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Header">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Location_Information">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Namelocation" type="xs:string"/>
+                                        <xs:element name="DetailLocation" type="xs:string"/>
+                                        <xs:element name="Timezone" type="xs:string"/>
+                                        <xs:element name="Latitude" type="xs:decimal"/>
+                                        <xs:element name="Longitude" type="xs:decimal"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Daily" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Time" type="xs:date"/>
+                            <xs:element name="SunInformation">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Sunrise" type="xs:dateTime"/>
+                                        <xs:element name="Sunset" type="xs:dateTime"/>
+                                        <xs:element name="SunshineDuration" type="xs:decimal"/>
+                                        <xs:element name="DaylightDuration" type="xs:decimal"/>
+                                        <xs:element name="ApparentTemperatureMin" type="xs:decimal"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="WeatherInformation">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="ApparentTemperatureMin" type="xs:decimal"/>
+                                        <xs:element name="ApparentTemperatureMax" type="xs:decimal"/>
+                                        <xs:element name="TemperatureMin" type="xs:decimal"/>
+                                        <xs:element name="TemperatureMax" type="xs:decimal"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="WindInformation">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="WindSpeedMax" type="xs:decimal"/>
+                                        <xs:element name="WindGustsMax" type="xs:decimal"/>
+                                        <xs:element name="WindDirectionDominant" type="xs:int"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="PrecipitationInformation">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="RainSum" type="xs:decimal"/>
+                                        <xs:element name="PrecipitationSum" type="xs:decimal"/>
+                                        <xs:element name="PrecipitationProbabilityMax" type="xs:int"/>
+                                        <xs:element name="PrecipitationHours" type="xs:decimal"/>
+                                        <xs:element name="ShowerSum" type="xs:decimal"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="UVInformation">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="UvIndexMax" type="xs:decimal"/>
+                                        <xs:element name="UvIndexClearSkyMax" type="xs:decimal"/>
+                                        <xs:element name="ShortWaveRadiationSum" type="xs:decimal"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Others">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Evapotranspiration" type="xs:decimal"/>
+                                        <xs:element name="SnowfallSum" type="xs:decimal"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
