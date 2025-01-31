@@ -41,7 +41,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	
 	        .to("xslt:classpath:schema/RenderXML.xslt")
 	        .to("xslt:classpath:schema/RemoveNulls.xslt")
-	        .log("${body}")
+
 	        .to("validator:classpath:validator/SixteenDayForecast.xsd")
 	        .log("LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
