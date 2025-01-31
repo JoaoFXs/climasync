@@ -34,18 +34,21 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .setProperty("nameLocation").simple("${header.name}")
 	        .setProperty("detailLocation").simple("${header.detailLocation}")
 	        .bean(ToolBox.class, "convertJsontoXML")
+	        //.bean(ToolBox.class, "saveText")
 	        .setBody().simple("<root>${body}</root>")
 	
 	        
 	
 	        .to("xslt:classpath:schema/RenderXML.xslt")
-	        
+	        .to("xslt:classpath:schema/RemoveNulls.xslt")
+	        .log("${body}")
+	        .to("validator:classpath:validator/SixteenDayForecast.xsd")
 	        .log("LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
-	        .to("validator:classpath:validator/SixteenDayForecast.xsd")
+	       
 	        
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
-	        //.bean(ToolBox.class, "saveText")
+	     
 	        
 	        
 	        .log("${body}")
