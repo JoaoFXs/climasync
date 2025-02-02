@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.project</groupId>
 	<artifactId>climasync</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>climasync</name>
 	<description>Plataforma de Integração para Captura e Distribuição de Dados Meteorológicos 
 </description>

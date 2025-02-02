@@ -18,6 +18,9 @@ public class DailyWeatherRoute extends RouteBuilder {
 	@Value("#{'${locations}'.split(',')}")
 	public List<String> locations;
 	
+	
+	@Value("activemq.queue")
+	public String queue;
     @Override
     public void configure() throws Exception {
         
@@ -48,10 +51,12 @@ public class DailyWeatherRoute extends RouteBuilder {
 	       
 	        
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
-	     
-	        .to("jms:queue:weather.api.queue")
 	        
-	        .log("${body}")
+	        
+	        .log("LOG003 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - " + queue + " - Start")
+	        .toD("jms:queue:weather.api." + "${exchangeProperty.nameLocation}")
+	        .log("LOG103 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - "+queue +" - End")
+	   
          .end()
          
          .log("LOG100 - Daily Weather Integration - End")
