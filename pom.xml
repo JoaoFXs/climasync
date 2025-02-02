@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.project</groupId>
 	<artifactId>climasync</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>climasync</name>
 	<description>Plataforma de Integração para Captura e Distribuição de Dados Meteorológicos 
 </description>
@@ -175,6 +175,20 @@
 		    <artifactId>jaxb-xjc</artifactId>
 		    <version>2.3.3</version>
 		</dependency>
+
+		<dependency>
+		    <groupId>org.apache.activemq</groupId>
+		    <artifactId>activemq-camel</artifactId>
+		    <version>5.16.7</version>
+		</dependency>
+		
+				<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker -->
+		<dependency>
+		    <groupId>org.apache.activemq</groupId>
+		    <artifactId>activemq-broker</artifactId>
+		    <version>6.1.5</version>
+		</dependency>
+				
 
 	</dependencies>
 
