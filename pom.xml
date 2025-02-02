@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.project</groupId>
 	<artifactId>climasync</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>climasync</name>
 	<description>Plataforma de Integração para Captura e Distribuição de Dados Meteorológicos 
 </description>
@@ -163,12 +163,7 @@
 		</dependency>
 		
 		<!--  Convert Json to Xml -->
-		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>20210307</version>
-		</dependency>
-		
+
 		<!--  Biblioteca para gerar xsd -->
 		<dependency>
 		    <groupId>org.glassfish.jaxb</groupId>
@@ -186,9 +181,16 @@
 		<dependency>
 		    <groupId>org.apache.activemq</groupId>
 		    <artifactId>activemq-broker</artifactId>
-		    <version>6.1.5</version>
+		    <version>5.16.7</version>
 		</dependency>
 				
+<dependency>
+    <groupId>org.apache.camel</groupId>
+    <artifactId>camel-jms</artifactId>
+    <version>4.9.0</version> <!-- Use a versão compatível com seu projeto -->
+</dependency>
+
+
 
 	</dependencies>
 

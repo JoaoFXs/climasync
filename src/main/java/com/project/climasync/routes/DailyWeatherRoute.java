@@ -49,7 +49,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
 	     
-	        
+	        .to("jms:queue:weather.api.queue")
 	        
 	        .log("${body}")
          .end()
