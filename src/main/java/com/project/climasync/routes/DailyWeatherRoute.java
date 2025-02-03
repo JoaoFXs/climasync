@@ -1,6 +1,7 @@
 package com.project.climasync.routes;
 import java.util.List;
 
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +47,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .to("xslt:classpath:schema/RemoveNulls.xslt")
 
 	        .to("validator:classpath:validator/SixteenDayForecast.xsd")
-	        .log("LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
+	        .log(LoggingLevel.INFO, "LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
 	       
 	        
@@ -61,24 +62,6 @@ public class DailyWeatherRoute extends RouteBuilder {
          
          .log("LOG100 - Daily Weather Integration - End")
          ;   
-//            .process(exchange -> {
-//                Map<String, Object> body = exchange.getIn().getBody(Map.class);
-//                String city = (String) body.get("name");
-//                Double temperature = (Double) ((Map<String, Object>) body.get("main")).get("temp");
-//                Integer humidity = (Integer) ((Map<String, Object>) body.get("main")).get("humidity");
-//
-//                exchange.getIn().setBody(new Object[] { city, temperature, humidity });
-//            })
-            //.to("jdbc:dataSource?useHeadersAsParameters=true")
-            //.log("Weather data saved for: ${body[0]}");
-            
-            ;
-
-        // Exposição de API REST
-//        from("servlet:/weather")
-//            .setHeader("CamelSqlQuery", constant("SELECT * FROM weather_data WHERE city = :?city"))
-//            .to("jdbc:dataSource")
-//            .marshal().json();
             
     }
 }

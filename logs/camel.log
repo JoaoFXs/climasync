@@ -1,0 +1,12 @@
+2025-02-03 18:15:54 [restartedMain] INFO  o.a.c.i.engine.AbstractCamelContext -     Started DailyWeatherRoute (timer://fetchWeather)
+2025-02-03 18:17:02 [Thread-12] INFO  o.a.c.i.engine.AbstractCamelContext -     Stopped DailyWeatherRoute (timer://fetchWeather)
+2025-02-03 18:17:25 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
+2025-02-03 18:17:26 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
+2025-02-03 18:17:26 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
+2025-02-03 18:17:26 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue - activemq.queue - Start
+2025-02-03 18:17:27 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - São Paulo - Send to Queue - activemq.queue - End
+2025-02-03 18:17:27 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-03 18:17:27 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
+2025-02-03 18:17:27 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
+2025-02-03 18:17:27 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - Barueri - Send to Queue - activemq.queue - End
+2025-02-03 18:17:27 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG100 - Daily Weather Integration - End
