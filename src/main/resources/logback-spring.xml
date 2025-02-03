@@ -19,7 +19,7 @@
     </appender>
 
     <!-- Logger específico para a rota DailyWeatherRoute -->
-    <logger name="DailyWeatherRoute" level="INFO" additivity="false">
+    <logger name="DailyWeatherRoute" level="INFO" additivity="true">
         <appender-ref ref="CAMEL_FILE" />
     </logger>
 
