@@ -41,8 +41,6 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        //.bean(ToolBox.class, "saveText")
 	        .setBody().simple("<root>${body}</root>")
 	
-	        
-	
 	        .to("xslt:classpath:schema/RenderXML.xslt")
 	        .to("xslt:classpath:schema/RemoveNulls.xslt")
 
@@ -50,14 +48,18 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .log(LoggingLevel.INFO, "LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
 	       
-	        
+	        .log("Teste body>>> #${body.uvIndexClearSkyMax}")
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
 	        
 	        
 	        .log("LOG003 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - " + queue + " - Start")
 	        .toD("jms:queue:weather.api." + "${exchangeProperty.nameLocation}")
 	        .log("LOG103 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - "+queue +" - End")
-	   
+	        
+	        .log("LG004 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
+	       // .bean()
+	        .log("LG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
+	        
          .end()
          
          .log("LOG100 - Daily Weather Integration - End")
