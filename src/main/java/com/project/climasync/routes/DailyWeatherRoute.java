@@ -1,8 +1,18 @@
 package com.project.climasync.routes;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLHandshakeException;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.support.processor.validation.SchemaValidationException;
+import org.apache.hc.client5.http.HttpHostConnectException;
+import org.apache.hc.core5.http.NoHttpResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -39,11 +49,29 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.to("xslt:classpath:schema/ErrorXml.xslt")
     		.toD("jms:queue:weather.api.errors")
     		;
-//    		.process(exchange -> {
-//    		        exchange.getContext().getRouteController().stopRoute("DailyWeatherRoute");
-//    		   });
     	
+    	onException(org.apache.camel.http.base.HttpOperationFailedException.class, UnknownHostException.class,HttpHostConnectException.class, NoHttpResponseException.class, SSLHandshakeException.class, SocketException.class, TimeoutException.class,SocketTimeoutException.class, SSLException.class)
+    		.handled(true)
+    		.log("ERROR002 - Connection Error - ${exception.message}")
+    		.setProperty("status").simple("NOK")
+    		.setProperty("errorCode").simple("E950")
+    		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
+	        .setBody().simple("<root></root>")
+    		.to("xslt:classpath:schema/ErrorXml.xslt")
+    		.toD("jms:queue:weather.api.errors")
+    		;
     	
+    	onException(SchemaValidationException.class)
+    		.handled(true)
+    		.log("ERROR003 - Message Validation Error - ${exception.message}")
+    		.setProperty("status").simple("NOK")
+    		.setProperty("errorCode").simple("E950")
+    		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
+	        .setBody().simple("<root></root>")
+    		.to("xslt:classpath:schema/ErrorXml.xslt")
+    		.toD("jms:queue:weather.api.errors")
+    		;
+    		
     		
         // Timer para buscar
         from("timer:fetchWeather?period=" + periodTimer)
