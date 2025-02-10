@@ -28,6 +28,23 @@ public class DailyWeatherRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         
+    	
+    	onException(Exception.class)
+    		.handled(true)
+    		.log("ERROR001 - Generic error during integration - ${exception.message}")
+    		.setProperty("status").simple("NOK")
+    		.setProperty("errorCode").simple("E950")
+    		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
+	        .setBody().simple("<root></root>")
+    		.to("xslt:classpath:schema/ErrorXml.xslt")
+    		.toD("jms:queue:weather.api.errors")
+    		;
+//    		.process(exchange -> {
+//    		        exchange.getContext().getRouteController().stopRoute("DailyWeatherRoute");
+//    		   });
+    	
+    	
+    		
         // Timer para buscar
         from("timer:fetchWeather?period=" + periodTimer)
         .routeId("DailyWeatherRoute")
