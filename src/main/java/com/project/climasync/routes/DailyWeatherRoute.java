@@ -29,7 +29,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     public void configure() throws Exception {
         
         // Timer para buscar
-        from("timer:fetchWeather?period=1hr")
+        from("timer:fetchWeather?period=" + periodTimer)
         .routeId("DailyWeatherRoute")
         .setHeader("CamelHttpMethod", constant("GET")) // Define o método HTTP como GET   
         .setBody().constant(locations)
@@ -44,7 +44,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .bean(ToolBox.class, "convertJsontoXML")
 	        //.bean(ToolBox.class, "saveText")
 	        .setBody().simple("<root>${body}</root>")
-	        .log("AQUI")
+
 	        .to("xslt:classpath:schema/RenderXML.xslt")
 	        .to("xslt:classpath:schema/RemoveNulls.xslt")
 
