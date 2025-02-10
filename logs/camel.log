@@ -61,3 +61,29 @@
 2025-02-10 17:58:54 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
 2025-02-10 17:58:54 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
 2025-02-10 17:58:54 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
+2025-02-10 18:25:05 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
+2025-02-10 18:26:44 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
+2025-02-10 18:28:16 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
+2025-02-10 18:29:04 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
+2025-02-10 18:29:23 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
+2025-02-10 18:29:24 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - AQUI
+2025-02-10 18:29:25 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - AQUI
+2025-02-10 18:29:37 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
+2025-02-10 18:29:39 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - AQUI
+2025-02-10 18:29:39 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - AQUI
+2025-02-10 18:29:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
+2025-02-10 18:29:55 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - AQUI
+2025-02-10 18:29:55 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
+2025-02-10 18:29:55 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
+2025-02-10 18:29:55 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue - activemq.queue - Start
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - São Paulo - Send to Queue - activemq.queue - End
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG004 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG104 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - AQUI
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - Barueri - Send to Queue - activemq.queue - End
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG004 - Location - Barueri - Send to DataBase - Start
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG104 - Location - Barueri - Send to DataBase - Start
+2025-02-10 18:29:56 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG100 - Weather Forecast Integration - End

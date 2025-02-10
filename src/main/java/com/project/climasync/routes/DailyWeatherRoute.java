@@ -20,6 +20,8 @@ public class DailyWeatherRoute extends RouteBuilder {
 	@Value("#{'${locations}'.split(',')}")
 	public List<String> locations;
 	
+	@Value("${period.timer}")
+	public String periodTimer;
 	
 	@Value("activemq.queue")
 	public String queue;
@@ -32,24 +34,25 @@ public class DailyWeatherRoute extends RouteBuilder {
         .setHeader("CamelHttpMethod", constant("GET")) // Define o método HTTP como GET   
         .setBody().constant(locations)
         
-        .log("LOG001 - Daily Weather Integration - Started")
+        .log("LOG001 - Weather Forecast Integration - Started")
         
         .split(body()) 
 	        .bean(EndpointDestinationFactory.class, "createEndpoint")
 	        .setProperty("nameLocation").simple("${header.name}")
 	        .setProperty("detailLocation").simple("${header.detailLocation}")
+	     
 	        .bean(ToolBox.class, "convertJsontoXML")
 	        //.bean(ToolBox.class, "saveText")
 	        .setBody().simple("<root>${body}</root>")
-	
+	        .log("AQUI")
 	        .to("xslt:classpath:schema/RenderXML.xslt")
 	        .to("xslt:classpath:schema/RemoveNulls.xslt")
 
-	        .to("validator:classpath:validator/SixteenDayForecast.xsd")
 	        .log(LoggingLevel.INFO, "LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
 	       
 
+	        .to("validator:classpath:validator/WeatherForecast.xsd")
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
 	        
 	        
@@ -63,7 +66,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        
          .end()
          
-         .log("LOG100 - Daily Weather Integration - End")
+         .log("LOG100 - Weather Forecast Integration - End")
          ;   
             
     }

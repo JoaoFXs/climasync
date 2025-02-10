@@ -8,9 +8,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import lombok.Data;
 
-@JacksonXmlRootElement(localName = "SixteenDayForecast")
+@JacksonXmlRootElement(localName = "WeatherForecast")
 @Data
-public class SixteenDayForecast {
+public class  WeatherForecast {
 
     @JacksonXmlProperty(localName = "Header")
     private Header header;

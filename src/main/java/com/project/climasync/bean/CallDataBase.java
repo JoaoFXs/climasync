@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.project.climasync.pojo.Daily;
-import com.project.climasync.pojo.SixteenDayForecast;
+import com.project.climasync.pojo.WeatherForecast;
 
 @Component
 public class CallDataBase {
@@ -30,10 +30,10 @@ public class CallDataBase {
     public void insertSixteenDayForecastTable(Exchange ex) throws JsonMappingException, JsonProcessingException {
         String body = ex.getIn().getBody(String.class);
         XmlMapper xmlMapper = new XmlMapper();
-        SixteenDayForecast xml = xmlMapper.readValue(body, SixteenDayForecast.class);
+        WeatherForecast xml = xmlMapper.readValue(body, WeatherForecast.class);
 
         try (Connection conn = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO SixteenDayForecast (" +
+            String query = "INSERT INTO  WeatherForecast (" +
                     "Namelocation, DetailLocation, Timezone, Latitude, Longitude, ForecastDate, " +
                     "Sunrise, Sunset, SunshineDuration, DaylightDuration, ApparentTemperatureMin, " +
                     "ApparentTemperatureMax, TemperatureMin, TemperatureMax, WindSpeedMax, " +

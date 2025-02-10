@@ -5,7 +5,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:param name="nameLocation"/>
 <xsl:param name="detailLocation"/>
 <xsl:template match="/">
-  <SixteenDayForecast>
+  <WeatherForecast>
   <Header>
   	<Location_Information>
 		<Namelocation><xsl:value-of select="$nameLocation"/></Namelocation>
@@ -79,7 +79,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!--       </xsl:for-each> -->
 <!--     </table> -->
 <!--   </Header> -->
-  </SixteenDayForecast>
+  </WeatherForecast>
 </xsl:template>
 
 </xsl:stylesheet>
