@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.project.climasync.bean.CallDataBase;
 import com.project.climasync.config.EndpointDestinationFactory;
 import com.project.climasync.utils.ToolBox;
 
@@ -48,7 +49,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .log(LoggingLevel.INFO, "LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
 	       
-	        .log("Teste body>>> #${body.uvIndexClearSkyMax}")
+
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
 	        
 	        
@@ -56,9 +57,9 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .toD("jms:queue:weather.api." + "${exchangeProperty.nameLocation}")
 	        .log("LOG103 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - "+queue +" - End")
 	        
-	        .log("LG004 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
-	       // .bean()
-	        .log("LG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
+	        .log("LOG004 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
+	        .bean(CallDataBase.class, "insertSixteenDayForecastTable")
+	        .log("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
 	        
          .end()
          

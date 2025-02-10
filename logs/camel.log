@@ -1,6 +1,63 @@
-2025-02-04 19:27:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
-2025-02-04 19:27:11 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
-2025-02-04 19:27:11 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
-2025-02-04 19:29:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
-2025-02-04 19:29:40 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
-2025-02-04 19:29:40 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-10 17:39:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
+2025-02-10 17:39:52 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
+2025-02-10 17:39:52 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
+2025-02-10 17:39:52 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue - activemq.queue - Start
+2025-02-10 17:39:52 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - São Paulo - Send to Queue - activemq.queue - End
+2025-02-10 17:39:52 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:39:53 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:39:53 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-10 17:39:53 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
+2025-02-10 17:39:53 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
+2025-02-10 17:39:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - Barueri - Send to Queue - activemq.queue - End
+2025-02-10 17:39:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:39:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:39:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG100 - Daily Weather Integration - End
+2025-02-10 17:48:47 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
+2025-02-10 17:48:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
+2025-02-10 17:48:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
+2025-02-10 17:48:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue - activemq.queue - Start
+2025-02-10 17:48:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - São Paulo - Send to Queue - activemq.queue - End
+2025-02-10 17:48:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:48:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:48:50 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-10 17:48:50 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
+2025-02-10 17:48:50 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
+2025-02-10 17:48:50 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - Barueri - Send to Queue - activemq.queue - End
+2025-02-10 17:48:50 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:48:50 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:48:50 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG100 - Daily Weather Integration - End
+2025-02-10 17:52:06 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
+2025-02-10 17:52:08 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
+2025-02-10 17:52:08 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
+2025-02-10 17:52:08 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue - activemq.queue - Start
+2025-02-10 17:52:08 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - São Paulo - Send to Queue - activemq.queue - End
+2025-02-10 17:52:08 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:52:08 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:52:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-10 17:52:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
+2025-02-10 17:52:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
+2025-02-10 17:52:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - Barueri - Send to Queue - activemq.queue - End
+2025-02-10 17:52:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:52:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:52:09 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG100 - Daily Weather Integration - End
+2025-02-10 17:58:35 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
+2025-02-10 17:58:37 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
+2025-02-10 17:58:37 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
+2025-02-10 17:58:37 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue - activemq.queue - Start
+2025-02-10 17:58:37 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - São Paulo - Send to Queue - activemq.queue - End
+2025-02-10 17:58:37 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:58:37 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - São Paulo - Send to DataBase - Start
+2025-02-10 17:58:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-10 17:58:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
+2025-02-10 17:58:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
+2025-02-10 17:58:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - Barueri - Send to Queue - activemq.queue - End
+2025-02-10 17:58:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG004 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:58:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LG104 - Location - Barueri - Send to DataBase - Start
+2025-02-10 17:58:38 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG100 - Daily Weather Integration - End
+2025-02-10 17:58:52 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Daily Weather Integration - Started
+2025-02-10 17:58:53 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
+2025-02-10 17:58:53 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
+2025-02-10 17:58:53 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue - activemq.queue - Start
+2025-02-10 17:58:54 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
+2025-02-10 17:58:54 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
+2025-02-10 17:58:54 [Camel (camel-2) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue - activemq.queue - Start
