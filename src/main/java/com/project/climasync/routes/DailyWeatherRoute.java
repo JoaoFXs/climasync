@@ -21,6 +21,7 @@ import com.project.climasync.bean.CallDataBase;
 import com.project.climasync.config.ConfigBroker;
 import com.project.climasync.config.EndpointDestinationFactory;
 import com.project.climasync.utils.ToolBox;
+import com.project.climasync.utils.ToolBoxEnum;
 
 @Component
 public class DailyWeatherRoute extends RouteBuilder {
@@ -49,7 +50,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
 	        .setBody().simple("<root></root>")
-    		.to("xslt:classpath:schema/ErrorXml.xslt")
+	        .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
     		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
     		;
     	
@@ -60,7 +61,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
 	        .setBody().simple("<root></root>")
-    		.to("xslt:classpath:schema/ErrorXml.xslt")
+	        .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
        		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
     		;
     	
@@ -71,7 +72,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
 	        .setBody().simple("<root></root>")
-    		.to("xslt:classpath:schema/ErrorXml.xslt")
+	        .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
        		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
     		;
     		
@@ -92,15 +93,15 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .bean(ToolBox.class, "convertJsontoXML")
 	        //.bean(ToolBox.class, "saveText")
 	        .setBody().simple("<root>${body}</root>")
+	        
+	        .to(ToolBoxEnum.XSLT.file("RenderXML.xslt"))
+	        .to(ToolBoxEnum.XSLT.file("RemoveNulls.xslt"))
 
-	        .to("xslt:classpath:schema/RenderXML.xslt")
-	        .to("xslt:classpath:schema/RemoveNulls.xslt")
-
-	        .log(LoggingLevel.INFO, "LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
+	        .log("LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
 	      
-
-	        .to("validator:classpath:validator/WeatherForecast.xsd")
+	        .to(ToolBoxEnum.VALIDATOR.file("WeatherForecast.xsd"))
+	      
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
 	        
 	        
@@ -112,7 +113,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        
 	        .log("LOG004 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
 	        .bean(CallDataBase.class, "insertSixteenDayForecastTable")
-	        .log("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
+	        .log("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - End")
 	        
          .end()
          
