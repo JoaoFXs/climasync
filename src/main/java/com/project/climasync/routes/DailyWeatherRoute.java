@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.project.climasync.bean.CallDataBase;
 import com.project.climasync.config.ConfigBroker;
 import com.project.climasync.config.EndpointDestinationFactory;
+import com.project.climasync.utils.Logs;
 import com.project.climasync.utils.ToolBox;
 import com.project.climasync.utils.ToolBoxEnum;
 
@@ -45,7 +46,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     	
     	onException(Exception.class)
     		.handled(true)
-    		.log("ERROR001 - Generic error during integration - ${exception.message}")
+    		.log(Logs.E001.message("Generic error during integration - ${exception.message}"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
@@ -56,7 +57,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     	
     	onException(org.apache.camel.http.base.HttpOperationFailedException.class, UnknownHostException.class,HttpHostConnectException.class, NoHttpResponseException.class, SSLHandshakeException.class, SocketException.class, TimeoutException.class,SocketTimeoutException.class, SSLException.class)
     		.handled(true)
-    		.log("ERROR002 - Connection Error - ${exception.message}")
+    		.log(Logs.E002.message("Connection Error - ${exception.message"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
@@ -67,7 +68,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     	
     	onException(SchemaValidationException.class)
     		.handled(true)
-    		.log("ERROR003 - Message Validation Error - ${exception.message}")
+    		.log(Logs.E003.message("Message Validation Error - ${exception.message"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
@@ -83,8 +84,9 @@ public class DailyWeatherRoute extends RouteBuilder {
         .setHeader("CamelHttpMethod", constant("GET")) // Define o método HTTP como GET   
         .setBody().constant(locations)
         
-        .log("LOG001 - Weather Forecast Integration - Started")
-        
+
+        .log(Logs.V001.message("Weather Forecast Integration - Started"))
+
         .split(body()) 
 	        .bean(EndpointDestinationFactory.class, "createEndpoint")
 	        .setProperty("nameLocation").simple("${header.name}")
@@ -96,28 +98,30 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        
 	        .to(ToolBoxEnum.XSLT.file("RenderXML.xslt"))
 	        .to(ToolBoxEnum.XSLT.file("RemoveNulls.xslt"))
+	        
+	        .log(Logs.V002.message("Location - ${exchangeProperty.nameLocation} - Message Validation - Started"))
 
-	        .log("LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
 	      
 	        .to(ToolBoxEnum.VALIDATOR.file("WeatherForecast.xsd"))
 	      
-	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
-	        
-	        
-	        .log("LOG003 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - " + " - Start")
+	        .log(Logs.V102.message("Location - ${exchangeProperty.nameLocation} - Message Validation - End"))
+
+	        .log(Logs.V003.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" + \" - Start"))
 	        
 	        .toD(ConfigBroker.JMSQUEUE.queueLocation("weather.api.","${exchangeProperty.nameLocation}"))
 
-	        .log("LOG103 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - " +" - End")
-	        
-	        .log("LOG004 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
+	        .log(Logs.V103.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" +\" - End"))
+
+	        .log(Logs.V004.message("Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start"))
+	 
 	        .bean(CallDataBase.class, "insertSixteenDayForecastTable")
-	        .log("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - End")
+	        
+	        .log(Logs.V104.message("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - End"))
 	        
          .end()
          
-         .log("LOG100 - Weather Forecast Integration - End");   
+         .log(Logs.V100.message("Weather Forecast Integration - End"));   
             
     }
 }
