@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.project.climasync.bean.CallDataBase;
+import com.project.climasync.config.ConfigBroker;
 import com.project.climasync.config.EndpointDestinationFactory;
 import com.project.climasync.utils.ToolBox;
 
@@ -33,8 +34,10 @@ public class DailyWeatherRoute extends RouteBuilder {
 	@Value("${period.timer}")
 	public String periodTimer;
 	
-	@Value("activemq.queue")
-	public String queue;
+	@Value("${activemq.queue.error}")
+	public String queueError;
+	
+
     @Override
     public void configure() throws Exception {
         
@@ -47,7 +50,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
 	        .setBody().simple("<root></root>")
     		.to("xslt:classpath:schema/ErrorXml.xslt")
-    		.toD("jms:queue:weather.api.errors")
+    		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
     		;
     	
     	onException(org.apache.camel.http.base.HttpOperationFailedException.class, UnknownHostException.class,HttpHostConnectException.class, NoHttpResponseException.class, SSLHandshakeException.class, SocketException.class, TimeoutException.class,SocketTimeoutException.class, SSLException.class)
@@ -58,7 +61,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
 	        .setBody().simple("<root></root>")
     		.to("xslt:classpath:schema/ErrorXml.xslt")
-    		.toD("jms:queue:weather.api.errors")
+       		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
     		;
     	
     	onException(SchemaValidationException.class)
@@ -69,7 +72,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
 	        .setBody().simple("<root></root>")
     		.to("xslt:classpath:schema/ErrorXml.xslt")
-    		.toD("jms:queue:weather.api.errors")
+       		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
     		;
     		
     		
@@ -85,7 +88,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .bean(EndpointDestinationFactory.class, "createEndpoint")
 	        .setProperty("nameLocation").simple("${header.name}")
 	        .setProperty("detailLocation").simple("${header.detailLocation}")
-	     
+
 	        .bean(ToolBox.class, "convertJsontoXML")
 	        //.bean(ToolBox.class, "saveText")
 	        .setBody().simple("<root>${body}</root>")
@@ -95,15 +98,17 @@ public class DailyWeatherRoute extends RouteBuilder {
 
 	        .log(LoggingLevel.INFO, "LOG002 - Location - ${exchangeProperty.nameLocation} - Message Validation - Started")
 	        //Message Validation through XSD
-	       
+	      
 
 	        .to("validator:classpath:validator/WeatherForecast.xsd")
 	        .log("LOG102 - Location - ${exchangeProperty.nameLocation} - Message Validation - End")
 	        
 	        
-	        .log("LOG003 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - " + queue + " - Start")
-	        .toD("jms:queue:weather.api." + "${exchangeProperty.nameLocation}")
-	        .log("LOG103 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - "+queue +" - End")
+	        .log("LOG003 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - " + " - Start")
+	        
+	        .toD(ConfigBroker.JMSQUEUE.queueLocation("weather.api.","${exchangeProperty.nameLocation}"))
+
+	        .log("LOG103 - Location  - ${exchangeProperty.nameLocation} - Send to Queue - " +" - End")
 	        
 	        .log("LOG004 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start")
 	        .bean(CallDataBase.class, "insertSixteenDayForecastTable")
@@ -111,8 +116,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        
          .end()
          
-         .log("LOG100 - Weather Forecast Integration - End")
-         ;   
+         .log("LOG100 - Weather Forecast Integration - End");   
             
     }
 }
