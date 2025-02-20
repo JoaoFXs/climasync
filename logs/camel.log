@@ -1,14 +1,11 @@
-2025-02-11 18:10:46 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG001 - Weather Forecast Integration - Started
-2025-02-11 18:10:48 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - São Paulo - Message Validation - Started
-2025-02-11 18:10:48 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - São Paulo - Message Validation - End
-2025-02-11 18:10:48 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - São Paulo - Send to Queue -  - Start
-2025-02-11 18:10:48 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - São Paulo - Send to Queue -  - End
-2025-02-11 18:10:48 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG004 - Location - São Paulo - Send to DataBase - Start
-2025-02-11 18:10:48 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG104 - Location - São Paulo - Send to DataBase - Start
-2025-02-11 18:10:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG002 - Location - Barueri - Message Validation - Started
-2025-02-11 18:10:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG102 - Location - Barueri - Message Validation - End
-2025-02-11 18:10:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG003 - Location  - Barueri - Send to Queue -  - Start
-2025-02-11 18:10:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG103 - Location  - Barueri - Send to Queue -  - End
-2025-02-11 18:10:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG004 - Location - Barueri - Send to DataBase - Start
-2025-02-11 18:10:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG104 - Location - Barueri - Send to DataBase - Start
-2025-02-11 18:10:49 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOG100 - Weather Forecast Integration - End
+2025-02-20 17:07:12 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOGV001 - Weather Forecast Integration - Started
+2025-02-20 17:07:24 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - ERROR001 - Generic error during integration - I/O error on GET request for "https://apixxx.open-meteo.com/v1/forecast": Este host não é conhecido (apixxx.open-meteo.com)
+2025-02-20 17:07:35 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - ERROR001 - Generic error during integration - I/O error on GET request for "https://apixxx.open-meteo.com/v1/forecast": Este host não é conhecido (apixxx.open-meteo.com)
+2025-02-20 17:07:35 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOGV100 - Weather Forecast Integration - End
+2025-02-20 17:08:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOGV001 - Weather Forecast Integration - Started
+2025-02-20 17:09:33 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOGV001 - Weather Forecast Integration - Started
+2025-02-20 17:11:31 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOGV001 - Weather Forecast Integration - Started
+2025-02-20 17:11:42 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - ERROR001 - Generic error during integration - I/O error on GET request for "https://apixxx.open-meteo.com/v1/forecast": Este host não é conhecido (apixxx.open-meteo.com)
+2025-02-20 17:11:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - ERROR001 - Generic error during integration - I/O error on GET request for "https://apixxx.open-meteo.com/v1/forecast": Este host não é conhecido (apixxx.open-meteo.com)
+2025-02-20 17:11:54 [Camel (camel-1) thread #1 - timer://fetchWeather] INFO  DailyWeatherRoute - LOGV100 - Weather Forecast Integration - End
+2025-02-20 17:20:31 [Camel (camel-3) thread #3 - timer://fetchWeather] INFO  DailyWeatherRoute - LOGV001 - Weather Forecast Integration - Started

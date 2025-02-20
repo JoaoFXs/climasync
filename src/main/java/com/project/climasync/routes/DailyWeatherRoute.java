@@ -39,24 +39,48 @@ public class DailyWeatherRoute extends RouteBuilder {
 	@Value("${activemq.queue.error}")
 	public String queueError;
 	
-
+	@Value("${activemq.queue.redelivery}")
+	public String queueRedelivery;
+	
+	@Value("${redelivery.count}")
+	public int redeliveryCount;
+	
+	@Value("${redelivery.delay}")
+	public int redeliveryDelay;
+	
+	
     @Override
     public void configure() throws Exception {
         
+    	errorHandler(deadLetterChannel("jms:queue:dead")
+    			   .useOriginalMessage()
+    			   .maximumRedeliveries(redeliveryCount)
+    			   .redeliveryDelay(redeliveryDelay));
+    	
     	
     	onException(Exception.class)
     		.handled(true)
+    		.useOriginalMessage()
+    		.maximumRedeliveries(redeliveryCount)
+    		.redeliveryDelay(redeliveryDelay)
+	        .useOriginalMessage()
+    		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
     		.log(Logs.E001.message("Generic error during integration - ${exception.message}"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
 	        .setBody().simple("<root></root>")
 	        .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
-    		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
+			.toD(ConfigBroker.JMSQUEUE.queue(queueError))
     		;
     	
     	onException(org.apache.camel.http.base.HttpOperationFailedException.class, UnknownHostException.class,HttpHostConnectException.class, NoHttpResponseException.class, SSLHandshakeException.class, SocketException.class, TimeoutException.class,SocketTimeoutException.class, SSLException.class)
     		.handled(true)
+    		.useOriginalMessage()
+       		.maximumRedeliveries(redeliveryCount)
+    		.redeliveryDelay(redeliveryDelay)
+	        .useOriginalMessage()
+    		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
     		.log(Logs.E002.message("Connection Error - ${exception.message"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
@@ -68,6 +92,11 @@ public class DailyWeatherRoute extends RouteBuilder {
     	
     	onException(SchemaValidationException.class)
     		.handled(true)
+    		.useOriginalMessage()
+       		.maximumRedeliveries(redeliveryCount)
+    		.redeliveryDelay(redeliveryDelay)
+	        .useOriginalMessage()
+    		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
     		.log(Logs.E003.message("Message Validation Error - ${exception.message"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
@@ -116,6 +145,7 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .log(Logs.V004.message("Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start"))
 	 
 	        .bean(CallDataBase.class, "insertSixteenDayForecastTable")
+
 	        
 	        .log(Logs.V104.message("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - End"))
 	        
