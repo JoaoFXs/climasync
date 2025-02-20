@@ -107,7 +107,13 @@ public class DailyWeatherRoute extends RouteBuilder {
     		;
     		
     		
-        // Timer para buscar
+    	/**
+    	* A route that starts a timer to periodically fetch weather forecasts
+    	* based on the interval defined in 'period.timer'. For each location
+    	* specified in 'locations', the route makes a call to the weather API,
+    	* converts the JSON response to XML, validates the generated XML, and sends the data
+    	* to the corresponding queue and database.
+    	*/
         from("timer:fetchWeather?period=" + periodTimer)
         .routeId("DailyWeatherRoute")
         .setHeader("CamelHttpMethod", constant("GET")) // Define o método HTTP como GET   
@@ -116,6 +122,11 @@ public class DailyWeatherRoute extends RouteBuilder {
 
         .log(Logs.V001.message("Weather Forecast Integration - Started"))
 
+        /**
+        * Splits the message body, which contains the list of locations,
+        * into individual messages for each location, allowing
+        * separate processing of each location.
+        */
         .split(body()) 
 	        .bean(EndpointDestinationFactory.class, "createEndpoint")
 	        .setProperty("nameLocation").simple("${header.name}")
