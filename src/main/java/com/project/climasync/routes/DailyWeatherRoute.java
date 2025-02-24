@@ -81,7 +81,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.redeliveryDelay(redeliveryDelay)
 	        .useOriginalMessage()
     		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
-    		.log(Logs.E002.message("Connection Error - ${exception.message"))
+    		.log(Logs.E002.message("Connection Error - ${exception.message}"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
@@ -97,7 +97,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     		.redeliveryDelay(redeliveryDelay)
 	        .useOriginalMessage()
     		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
-    		.log(Logs.E003.message("Message Validation Error - ${exception.message"))
+    		.log(Logs.E003.message("Message Validation Error - ${exception.message}"))
     		.setProperty("status").simple("NOK")
     		.setProperty("errorCode").simple("E950")
     		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
@@ -131,9 +131,15 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .bean(EndpointDestinationFactory.class, "createEndpoint")
 	        .setProperty("nameLocation").simple("${header.name}")
 	        .setProperty("detailLocation").simple("${header.detailLocation}")
-
+	        /**
+	         *Method for converting xml to json 
+	         */
 	        .bean(ToolBox.class, "convertJsontoXML")
-	        //.bean(ToolBox.class, "saveText")
+	        
+	       
+	        /**
+	         *inserting root to structure the xml
+	         */
 	        .setBody().simple("<root>${body}</root>")
 	        
 	        .to(ToolBoxEnum.XSLT.file("RenderXML.xslt"))
@@ -141,14 +147,19 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        
 	        .log(Logs.V002.message("Location - ${exchangeProperty.nameLocation} - Message Validation - Started"))
 
-	        //Message Validation through XSD
-	      
+	  
+	        /**
+	         *Message Validation through XSD
+	         */
 	        .to(ToolBoxEnum.VALIDATOR.file("WeatherForecast.xsd"))
 	      
 	        .log(Logs.V102.message("Location - ${exchangeProperty.nameLocation} - Message Validation - End"))
 
 	        .log(Logs.V003.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" + \" - Start"))
 	        
+	        /**
+	         * Send the generated message to the JMS Queue in ActiveMQ
+	         */
 	        .toD(ConfigBroker.JMSQUEUE.queueLocation("weather.api.","${exchangeProperty.nameLocation}"))
 
 	        .log(Logs.V103.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" +\" - End"))

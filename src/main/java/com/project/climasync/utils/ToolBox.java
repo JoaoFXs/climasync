@@ -21,7 +21,9 @@ public class ToolBox {
 	@Value("${file.path}")
 	String filePath;
 	
-
+    /**
+    *Method for converting xml to json 
+    */
 	public void convertJsontoXML(Exchange ex) {
 		String body = ex.getIn().getBody(String.class);
 		
@@ -30,7 +32,9 @@ public class ToolBox {
 		
 		ex.getOut().setBody(xml);
 	}
-	
+    /**
+    *Method for save file
+    */
 	public void saveText(Exchange ex) throws IOException {
 		String body = ex.getIn().getBody(String.class);
 		 File file = new File(filePath);
