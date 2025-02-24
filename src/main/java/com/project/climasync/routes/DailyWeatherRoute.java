@@ -158,10 +158,12 @@ public class DailyWeatherRoute extends RouteBuilder {
 	        .log(Logs.V003.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" + \" - Start"))
 	        
 	        /**
-	         * Send the generated message to the JMS Queue in ActiveMQ
+	         * Send the generated message to the JMS Queue in ActiveMQ.  Multicast was used to send to multiple queues
 	         */
-	        .toD(ConfigBroker.JMSQUEUE.queueLocation("weather.api.","${exchangeProperty.nameLocation}"))
-
+	        .multicast()
+		        .toD(ConfigBroker.JMSQUEUE.queueLocation("weather.api.location.","${exchangeProperty.nameLocation}"))
+		        .toD(ConfigBroker.JMSQUEUE.queue("weather.api.all.messages"))
+	        .end()
 	        .log(Logs.V103.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" +\" - End"))
 
 	        .log(Logs.V004.message("Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start"))
