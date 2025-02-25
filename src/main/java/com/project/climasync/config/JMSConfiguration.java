@@ -10,20 +10,29 @@ import org.springframework.jms.core.JmsTemplate;
 
 import jakarta.jms.ConnectionFactory;
 
+/**
+ * Configuration class for JMS (Java Message Service) using ActiveMQ.
+ * This class defines beans for setting up the JMS connection, template, 
+ * and listener container factory.
+ */
 @Configuration
 @EnableJms
 public class JMSConfiguration {
-	
-	@Value("${activemq.user}")
-	private String activemqUser;
-	
-	@Value("${activemq.user}")
-	private String activemqPwd;
-	
-	@Value("${activemq.url}")
-	private String activemqUrl;
-    
 
+    @Value("${activemq.user}")
+    private String activemqUser;
+
+    @Value("${activemq.user}")
+    private String activemqPwd;
+
+    @Value("${activemq.url}")
+    private String activemqUrl;
+
+    /**
+     * Creates and configures the JMS ConnectionFactory.
+     *
+     * @return the configured {@link ConnectionFactory} instance.
+     */
     @Bean
     public ConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
@@ -32,12 +41,23 @@ public class JMSConfiguration {
         factory.setPassword(activemqPwd);
         return factory;
     }
-    
+
+    /**
+     * Creates and configures the JMS template for sending messages.
+     *
+     * @return the configured {@link JmsTemplate} instance.
+     */
     @Bean
     public JmsTemplate jmsTemplate() {
         return new JmsTemplate(connectionFactory());
     }
-    
+
+    /**
+     * Creates and configures the JMS listener container factory.
+     * This factory is used for setting up message listeners.
+     *
+     * @return the configured {@link DefaultJmsListenerContainerFactory} instance.
+     */
     @Bean
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();

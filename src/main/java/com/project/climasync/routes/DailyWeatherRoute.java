@@ -52,59 +52,81 @@ public class DailyWeatherRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         
-    	errorHandler(deadLetterChannel("jms:queue:dead")
-    			   .useOriginalMessage()
-    			   .maximumRedeliveries(redeliveryCount)
-    			   .redeliveryDelay(redeliveryDelay));
-    	
-    	
-    	onException(Exception.class)
-    		.handled(true)
-    		.useOriginalMessage()
-    		.maximumRedeliveries(redeliveryCount)
-    		.redeliveryDelay(redeliveryDelay)
-	        .useOriginalMessage()
-    		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
-    		.log(Logs.E001.message("Generic error during integration - ${exception.message}"))
-    		.setProperty("status").simple("NOK")
-    		.setProperty("errorCode").simple("E950")
-    		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
-	        .setBody().simple("<root></root>")
-	        .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
-			.toD(ConfigBroker.JMSQUEUE.queue(queueError))
-    		;
-    	
-    	onException(org.apache.camel.http.base.HttpOperationFailedException.class, UnknownHostException.class,HttpHostConnectException.class, NoHttpResponseException.class, SSLHandshakeException.class, SocketException.class, TimeoutException.class,SocketTimeoutException.class, SSLException.class)
-    		.handled(true)
-    		.useOriginalMessage()
-       		.maximumRedeliveries(redeliveryCount)
-    		.redeliveryDelay(redeliveryDelay)
-	        .useOriginalMessage()
-    		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
-    		.log(Logs.E002.message("Connection Error - ${exception.message}"))
-    		.setProperty("status").simple("NOK")
-    		.setProperty("errorCode").simple("E950")
-    		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
-	        .setBody().simple("<root></root>")
-	        .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
-       		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
-    		;
-    	
-    	onException(SchemaValidationException.class)
-    		.handled(true)
-    		.useOriginalMessage()
-       		.maximumRedeliveries(redeliveryCount)
-    		.redeliveryDelay(redeliveryDelay)
-	        .useOriginalMessage()
-    		.toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
-    		.log(Logs.E003.message("Message Validation Error - ${exception.message}"))
-    		.setProperty("status").simple("NOK")
-    		.setProperty("errorCode").simple("E950")
-    		.setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
-	        .setBody().simple("<root></root>")
-	        .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
-       		.toD(ConfigBroker.JMSQUEUE.queue(queueError))
-    		;
+        /**
+         * Configures the dead-letter channel to handle message failures.
+         * Messages that cannot be processed will be sent to a JMS dead-letter queue.
+         */
+        errorHandler(deadLetterChannel(queueError)
+                       .useOriginalMessage()
+                       .maximumRedeliveries(redeliveryCount)
+                       .redeliveryDelay(redeliveryDelay));
+
+        /**
+         * Handles generic exceptions during integration.
+         * Logs the error, sets error properties, and sends the message to an error queue.
+         */
+        onException(Exception.class)
+            .handled(true)
+            .useOriginalMessage()
+            .maximumRedeliveries(redeliveryCount)
+            .redeliveryDelay(redeliveryDelay)
+            .useOriginalMessage()
+            .toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
+            .log(Logs.E001.message("Generic error during integration - ${exception.message}"))
+            .setProperty("status").simple("NOK")
+            .setProperty("errorCode").simple("E950")
+            .setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
+            .setBody().simple("<root></root>")
+            .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
+            .toD(ConfigBroker.JMSQUEUE.queue(queueError));
+
+        /**
+         * Handles connection-related exceptions.
+         * These include HTTP errors, timeouts, and SSL issues.
+         * Logs the error, sets error properties, and routes the message accordingly.
+         */
+        onException(org.apache.camel.http.base.HttpOperationFailedException.class, 
+                    UnknownHostException.class, 
+                    HttpHostConnectException.class, 
+                    NoHttpResponseException.class, 
+                    SSLHandshakeException.class, 
+                    SocketException.class, 
+                    TimeoutException.class, 
+                    SocketTimeoutException.class, 
+                    SSLException.class)
+            .handled(true)
+            .useOriginalMessage()
+            .maximumRedeliveries(redeliveryCount)
+            .redeliveryDelay(redeliveryDelay)
+            .useOriginalMessage()
+            .toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
+            .log(Logs.E002.message("Connection Error - ${exception.message}"))
+            .setProperty("status").simple("NOK")
+            .setProperty("errorCode").simple("E950")
+            .setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
+            .setBody().simple("<root></root>")
+            .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
+            .toD(ConfigBroker.JMSQUEUE.queue(queueError));
+
+        /**
+         * Handles schema validation exceptions.
+         * Occurs when messages fail validation against a predefined schema.
+         * Logs the error, sets error properties, and sends the message to an error queue.
+         */
+        onException(SchemaValidationException.class)
+            .handled(true)
+            .useOriginalMessage()
+            .maximumRedeliveries(redeliveryCount)
+            .redeliveryDelay(redeliveryDelay)
+            .useOriginalMessage()
+            .toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
+            .log(Logs.E003.message("Message Validation Error - ${exception.message}"))
+            .setProperty("status").simple("NOK")
+            .setProperty("errorCode").simple("E950")
+            .setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
+            .setBody().simple("<root></root>")
+            .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
+            .toD(ConfigBroker.JMSQUEUE.queue(queueError));
     		
     		
     	/**

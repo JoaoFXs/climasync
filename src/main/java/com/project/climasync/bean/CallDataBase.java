@@ -15,6 +15,10 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.project.climasync.pojo.Daily;
 import com.project.climasync.pojo.WeatherForecast;
 
+/**
+ * This component handles database operations related to weather forecasts.
+ * It processes XML data from an exchange and inserts the parsed data into the database.
+ */
 @Component
 public class CallDataBase {
 
@@ -27,13 +31,21 @@ public class CallDataBase {
     @Value("${spring.datasource.password}")
     private String password;
 
+    /**
+     * Parses an XML weather forecast from the exchange body and inserts the data 
+     * into the database.
+     *
+     * @param ex the Camel Exchange containing the XML data
+     * @throws JsonMappingException if there is an issue mapping the XML to Java objects
+     * @throws JsonProcessingException if there is an issue processing the XML content
+     */
     public void insertSixteenDayForecastTable(Exchange ex) throws JsonMappingException, JsonProcessingException {
         String body = ex.getIn().getBody(String.class);
         XmlMapper xmlMapper = new XmlMapper();
         WeatherForecast xml = xmlMapper.readValue(body, WeatherForecast.class);
 
         try (Connection conn = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO  WeatherForecast (" +
+            String query = "INSERT INTO WeatherForecast (" +
                     "Namelocation, DetailLocation, Timezone, Latitude, Longitude, ForecastDate, " +
                     "Sunrise, Sunset, SunshineDuration, DaylightDuration, ApparentTemperatureMin, " +
                     "ApparentTemperatureMax, TemperatureMin, TemperatureMax, WindSpeedMax, " +
@@ -76,7 +88,7 @@ public class CallDataBase {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+            System.err.println("Error connecting to the database: " + e.getMessage());
             e.printStackTrace();
         }
     }
