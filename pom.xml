@@ -12,7 +12,7 @@
     </parent>
     <groupId>com.project</groupId>
     <artifactId>climasync</artifactId>
-    <version>0.0.6-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
     <name>climasync</name>
     <description>Plataforma de Integração para Captura e Distribuição de Dados Meteorológicos</description>
     
@@ -183,11 +183,16 @@
             <version>2.3.3</version>
         </dependency>
         <dependency>
-    <groupId>org.codehaus.janino</groupId>
-    <artifactId>janino</artifactId>
-    <version>3.1.9</version>
-</dependency>
-
+		    <groupId>org.codehaus.janino</groupId>
+		    <artifactId>janino</artifactId>
+		    <version>3.1.9</version>
+		</dependency>
+		
+	<dependency>
+	    <groupId>org.apache.camel</groupId>
+	    <artifactId>camel-resilience4j</artifactId>
+	    <version>4.9.0</version><!-- use the same version as your Camel core version -->
+	</dependency>
 
         
     </dependencies>

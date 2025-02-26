@@ -8,7 +8,7 @@ import java.util.concurrent.TimeoutException;
 import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLHandshakeException;
 
-import org.apache.camel.LoggingLevel;
+import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.support.processor.validation.SchemaValidationException;
 import org.apache.hc.client5.http.HttpHostConnectException;
@@ -48,7 +48,8 @@ public class DailyWeatherRoute extends RouteBuilder {
 	@Value("${redelivery.delay}")
 	public int redeliveryDelay;
 	
-	
+	@Value("${timeout.jdbc}")
+	public int timeoutIntegration;
     @Override
     public void configure() throws Exception {
         
@@ -56,7 +57,7 @@ public class DailyWeatherRoute extends RouteBuilder {
          * Configures the dead-letter channel to handle message failures.
          * Messages that cannot be processed will be sent to a JMS dead-letter queue.
          */
-        errorHandler(deadLetterChannel(queueError)
+        errorHandler(deadLetterChannel(ConfigBroker.JMSQUEUE.queue(queueError))
                        .useOriginalMessage()
                        .maximumRedeliveries(redeliveryCount)
                        .redeliveryDelay(redeliveryDelay));
@@ -74,7 +75,7 @@ public class DailyWeatherRoute extends RouteBuilder {
             .toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
             .log(Logs.E001.message("Generic error during integration - ${exception.message}"))
             .setProperty("status").simple("NOK")
-            .setProperty("errorCode").simple("E950")
+            .setProperty("errorCode").simple("E001")
             .setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
             .setBody().simple("<root></root>")
             .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
@@ -102,7 +103,7 @@ public class DailyWeatherRoute extends RouteBuilder {
             .toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
             .log(Logs.E002.message("Connection Error - ${exception.message}"))
             .setProperty("status").simple("NOK")
-            .setProperty("errorCode").simple("E950")
+            .setProperty("errorCode").simple("E002")
             .setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
             .setBody().simple("<root></root>")
             .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
@@ -122,7 +123,7 @@ public class DailyWeatherRoute extends RouteBuilder {
             .toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
             .log(Logs.E003.message("Message Validation Error - ${exception.message}"))
             .setProperty("status").simple("NOK")
-            .setProperty("errorCode").simple("E950")
+            .setProperty("errorCode").simple("E003")
             .setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
             .setBody().simple("<root></root>")
             .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
@@ -137,67 +138,86 @@ public class DailyWeatherRoute extends RouteBuilder {
     	* to the corresponding queue and database.
     	*/
         from("timer:fetchWeather?period=" + periodTimer)
-        .routeId("DailyWeatherRoute")
-        .setHeader("CamelHttpMethod", constant("GET")) // Define o método HTTP como GET   
-        .setBody().constant(locations)
+ 
+			        .routeId("DailyWeatherRoute")
+			        .setHeader("CamelHttpMethod", constant("GET")) // Define o método HTTP como GET   
+			        .setBody().constant(locations)
+			     
+			        .log(Logs.V001.message("Weather Forecast Integration - Started"))
+			
+				        /**
+				        * Splits the message body, which contains the list of locations,
+				        * into individual messages for each location, allowing
+				        * separate processing of each location.
+				        */
+				        .split(body()) 
+					        .bean(EndpointDestinationFactory.class, "createEndpoint")
+					        .setProperty("nameLocation").simple("${header.name}")
+					        .setProperty("detailLocation").simple("${header.detailLocation}")
+					        /**
+					         *Method for converting xml to json 
+					         */
+					        .bean(ToolBox.class, "convertJsontoXML")
+					        
+					       
+					        /**
+					         *inserting root to structure the xml
+					         */
+					        .setBody().simple("<root>${body}</root>")
+					        
+					        .to(ToolBoxEnum.XSLT.file("RenderXML.xslt"))
+					        .to(ToolBoxEnum.XSLT.file("RemoveNulls.xslt"))
+					        
+					        .log(Logs.V002.message("Location - ${exchangeProperty.nameLocation} - Message Validation - Started"))
+				
+					  
+					        /**
+					         *Message Validation through XSD
+					         */
+					        .to(ToolBoxEnum.VALIDATOR.file("WeatherForecast.xsd"))
+					      
+					        .log(Logs.V102.message("Location - ${exchangeProperty.nameLocation} - Message Validation - End"))
+				
+					        .log(Logs.V003.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" + \" - Start"))
+					        
+					        /**
+					         * Send the generated message to the JMS Queue in ActiveMQ.  Multicast was used to send to multiple queues
+					         */
+						        .multicast()
+							        .toD(ConfigBroker.JMSQUEUE.queueLocation("weather.api.location.","${exchangeProperty.nameLocation}"))
+							        .toD(ConfigBroker.JMSQUEUE.queue("weather.api.all.messages"))
+						        .end()
+					        .log(Logs.V103.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" +\" - End"))
+				
+					        .log(Logs.V004.message("Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start"))
+					      	
+					     
+					        .to("direct:insertDatabase")
+					        
+					        .log(Logs.V104.message("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - End"))
+					        
+				         .end()
+			         
+			         .log(Logs.V100.message("Weather Forecast Integration - End"))
+			
+		       
+		   
+			  
+         .end();   
+     
         
-
-        .log(Logs.V001.message("Weather Forecast Integration - Started"))
-
-        /**
-        * Splits the message body, which contains the list of locations,
-        * into individual messages for each location, allowing
-        * separate processing of each location.
-        */
-        .split(body()) 
-	        .bean(EndpointDestinationFactory.class, "createEndpoint")
-	        .setProperty("nameLocation").simple("${header.name}")
-	        .setProperty("detailLocation").simple("${header.detailLocation}")
-	        /**
-	         *Method for converting xml to json 
-	         */
-	        .bean(ToolBox.class, "convertJsontoXML")
-	        
-	       
-	        /**
-	         *inserting root to structure the xml
-	         */
-	        .setBody().simple("<root>${body}</root>")
-	        
-	        .to(ToolBoxEnum.XSLT.file("RenderXML.xslt"))
-	        .to(ToolBoxEnum.XSLT.file("RemoveNulls.xslt"))
-	        
-	        .log(Logs.V002.message("Location - ${exchangeProperty.nameLocation} - Message Validation - Started"))
-
-	  
-	        /**
-	         *Message Validation through XSD
-	         */
-	        .to(ToolBoxEnum.VALIDATOR.file("WeatherForecast.xsd"))
-	      
-	        .log(Logs.V102.message("Location - ${exchangeProperty.nameLocation} - Message Validation - End"))
-
-	        .log(Logs.V003.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" + \" - Start"))
-	        
-	        /**
-	         * Send the generated message to the JMS Queue in ActiveMQ.  Multicast was used to send to multiple queues
-	         */
-	        .multicast()
-		        .toD(ConfigBroker.JMSQUEUE.queueLocation("weather.api.location.","${exchangeProperty.nameLocation}"))
-		        .toD(ConfigBroker.JMSQUEUE.queue("weather.api.all.messages"))
-	        .end()
-	        .log(Logs.V103.message("Location  - ${exchangeProperty.nameLocation} - Send to Queue - \" +\" - End"))
-
-	        .log(Logs.V004.message("Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start"))
-	 
-	        .bean(CallDataBase.class, "insertSixteenDayForecastTable")
-
-	        
-	        .log(Logs.V104.message("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - End"))
-	        
-         .end()
-         
-         .log(Logs.V100.message("Weather Forecast Integration - End"));   
-            
+        
+        from("direct:insertDatabase")
+        .routeId("insertDatabase")
+        .circuitBreaker()
+            .resilience4jConfiguration()
+                .failureRateThreshold(50)  // Opens the circuit if 50% of calls fail
+                .slidingWindowSize(10)     // Considers the last 10 requests
+                .waitDurationInOpenState(20000) // Wait 20s before trying again
+            .end()
+            .bean(CallDataBase.class, "insertSixteenDayForecastTable")
+        .onFallback()
+            .log("E002 - Error accessing database, please try again later")
+        .end();
     }
 }

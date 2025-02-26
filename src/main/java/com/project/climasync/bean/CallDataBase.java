@@ -38,8 +38,9 @@ public class CallDataBase {
      * @param ex the Camel Exchange containing the XML data
      * @throws JsonMappingException if there is an issue mapping the XML to Java objects
      * @throws JsonProcessingException if there is an issue processing the XML content
+     * @throws SQLException 
      */
-    public void insertSixteenDayForecastTable(Exchange ex) throws JsonMappingException, JsonProcessingException {
+    public void insertSixteenDayForecastTable(Exchange ex) throws JsonMappingException, JsonProcessingException, SQLException {
         String body = ex.getIn().getBody(String.class);
         XmlMapper xmlMapper = new XmlMapper();
         WeatherForecast xml = xmlMapper.readValue(body, WeatherForecast.class);
@@ -88,8 +89,7 @@ public class CallDataBase {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error connecting to the database: " + e.getMessage());
-            e.printStackTrace();
+        	throw new SQLException("Error connecting to the database: " + e.getMessage());
         }
     }
 }
