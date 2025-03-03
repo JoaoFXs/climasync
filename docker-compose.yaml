@@ -26,7 +26,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - .climasync/src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   adminer:
     image: adminer
@@ -53,7 +53,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - .climasync/src/main/resources/docker/loki-config.yml:/etc/loki/local-config.yml
+      - ./src/main/resources/docker/loki-config.yml:/etc/loki/local-config.yml
     networks:
       - loki-network
     command: -config.file=/etc/loki/local-config.yml
@@ -62,7 +62,7 @@ services:
     image: grafana/promtail:latest
     container_name: promtail
     volumes:
-      - /src/main/resources/docker/promtail/promtail-config.yml:/etc/promtail/config.yml
+      - ./src/main/resources/docker/promtail/promtail-config.yml:/etc/promtail/config.yml
       - C:\eclipe-workspace\climasync\logs:/var/log
     networks:
       - loki-network

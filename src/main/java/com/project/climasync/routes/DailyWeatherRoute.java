@@ -8,7 +8,6 @@ import java.util.concurrent.TimeoutException;
 import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLHandshakeException;
 
-import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.support.processor.validation.SchemaValidationException;
 import org.apache.hc.client5.http.HttpHostConnectException;
@@ -138,8 +137,7 @@ public class DailyWeatherRoute extends RouteBuilder {
     	* to the corresponding queue and database.
     	*/
         from("timer:fetchWeather?period=" + periodTimer)
- 
-			        .routeId("DailyWeatherRoute")
+     		        .routeId("DailyWeatherRoute")
 			        .setHeader("CamelHttpMethod", constant("GET")) // Define o método HTTP como GET   
 			        .setBody().constant(locations)
 			     
@@ -191,18 +189,14 @@ public class DailyWeatherRoute extends RouteBuilder {
 				
 					        .log(Logs.V004.message("Location - ${exchangeProperty.nameLocation} - Send to DataBase - Start"))
 					      	
-					     
 					        .to("direct:insertDatabase")
 					        
-					        .log(Logs.V104.message("LOG104 - Location - ${exchangeProperty.nameLocation} - Send to DataBase - End"))
+					        .log(Logs.V104.message("Location - ${exchangeProperty.nameLocation} - Send to DataBase - End"))
 					        
 				         .end()
 			         
 			         .log(Logs.V100.message("Weather Forecast Integration - End"))
-			
-		       
-		   
-			  
+
          .end();   
      
         
@@ -217,7 +211,7 @@ public class DailyWeatherRoute extends RouteBuilder {
             .end()
             .bean(CallDataBase.class, "insertSixteenDayForecastTable")
         .onFallback()
-            .log("E002 - Error accessing database, please try again later")
+            .log("ERROR002 - Error accessing database, please try again later")
         .end();
     }
 }

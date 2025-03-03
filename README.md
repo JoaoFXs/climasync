@@ -7,6 +7,7 @@ This data is processed, validated, and stored in a database and ActiveMQ queues,
 ## Table of Contents
 
 - [Background](#background)
+- []
 
 
 ## Background
@@ -16,8 +17,10 @@ Additionally, ClimaSync captures the geographical coordinates required for weath
  The processed data is stored in a relational database (MySQL). A table schema has been designed to store structured information, including the city name, collection date and time, temperature, humidity, and weather forecast for the coming days. Additionally, the generated XML is sent to an ActiveMQ queue, allowing consumers to access the data directly in XML format, if needed. To enhance system reliability, error-handling techniques provided by Apache Camel have been applied, along with Resilience4j for circuit breaker management.
  
 ### The goals for this repository are:
+
 1. Utilize this project as a study tool for the Apache Camel framework, ActiveMQ, MySQL, XSD Validation, XSLT, Resilience4j, and Docker.
 2. Develop a complete integration in Apache Camel, covering the entire messaging lifecycle of a microservice—from message capture, validation, transformation, and routing to different destinations—ensuring data persistence and high availability.
 3. Explore routing strategies and asynchronous processing in Apache Camel, enabling the efficient distribution of captured data to various destinations, such as databases, message queues, and consuming APIs.
 4. Apply best practices in monitoring and logging, using tools like Camel Tracing and Log4j, along with Promtail, Grafana, and Loki, to collect, centralize, and visualize logs efficiently, facilitating debugging, failure analysis, and improved observability of the integration.
 5. Implement fault tolerance and resilience mechanisms, ensuring that the integration remains operational even in the event of temporary failures in the external API or database, using Resilience4j for circuit breaker management.
+

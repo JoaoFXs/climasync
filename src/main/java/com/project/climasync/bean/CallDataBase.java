@@ -44,7 +44,6 @@ public class CallDataBase {
         String body = ex.getIn().getBody(String.class);
         XmlMapper xmlMapper = new XmlMapper();
         WeatherForecast xml = xmlMapper.readValue(body, WeatherForecast.class);
-
         try (Connection conn = DriverManager.getConnection(url, username, password)) {
             String query = "INSERT INTO WeatherForecast (" +
                     "Namelocation, DetailLocation, Timezone, Latitude, Longitude, ForecastDate, " +
