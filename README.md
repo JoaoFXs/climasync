@@ -44,5 +44,7 @@ docker-compose build --no-cache
 ```sh
 docker-compose up -d
 ```
+With this, you will have a container running with the following images:
+- MySQL Database: The necessary configuration, such as database and table creation, are already found in the init.sql file.
 
 
