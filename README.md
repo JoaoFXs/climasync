@@ -24,3 +24,25 @@ Additionally, ClimaSync captures the geographical coordinates required for weath
 4. Apply best practices in monitoring and logging, using tools like Camel Tracing and Log4j, along with Promtail, Grafana, and Loki, to collect, centralize, and visualize logs efficiently, facilitating debugging, failure analysis, and improved observability of the integration.
 5. Implement fault tolerance and resilience mechanisms, ensuring that the integration remains operational even in the event of temporary failures in the external API or database, using Resilience4j for circuit breaker management.
 
+
+
+## Usage
+
+If you want to run this project on your machine, a docker-compose file and a Dockerfile are available for this purpose. Just follow the commands below:
+
+1. Generate a .jar
+```sh
+mvn clean package
+```
+2. Generate a build without cache
+
+```sh
+docker-compose build --no-cache
+```
+3. Start container with docker-compose
+
+```sh
+docker-compose up -d
+```
+
+
