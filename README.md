@@ -63,5 +63,6 @@ In the image, it is possible to see several logs, where there are two cities. Fi
 
 ![activemq portal](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/static/activemq.JPG)
 
-- [XML Success Example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/examples/xmlsucess.xml) for Barueri localization: 
+- [XML Success Example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/examples/xmlsucess.xml) for Barueri localization
+- [XML Error Example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/examples/xmlerror.xml) for Connection Error
 

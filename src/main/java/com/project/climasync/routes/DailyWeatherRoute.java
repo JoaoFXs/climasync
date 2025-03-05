@@ -123,7 +123,7 @@ public class DailyWeatherRoute extends RouteBuilder {
             .log(Logs.E003.message("Message Validation Error - ${exception.message}"))
             .setProperty("status").simple("NOK")
             .setProperty("errorCode").simple("E003")
-            .setProperty("errorDescription").simple("Generic error during integration - ${exception.message}")
+            .setProperty("errorDescription").simple("Connection error during integration - ${exception.message}")
             .setBody().simple("<root></root>")
             .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
             .toD(ConfigBroker.JMSQUEUE.queue(queueError));
