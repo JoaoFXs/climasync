@@ -15,7 +15,8 @@ This data is processed, validated, and stored in a database and ActiveMQ queues,
   - [Log Viewing](#log-viewing)
 - [Conclusion](#conclusion)
   - [Potential Applications](#potential-applications)
-  
+- [Maintainers](#maintainers)
+
 ## Background
 
 The ClimaSync project integrates weather data from an external meteorological API, OpenMeteo API, to periodically collect essential climate information—including temperature, humidity, and weather forecasts. The data collection frequency is configurable in days through project properties, ensuring that the latest data is always retrieved. Developed with the Apache Camel framework, the integration is designed to be robust and scalable, enabling efficient message flow management.
@@ -171,3 +172,23 @@ ClimaSync can be adapted for a wide range of applications across different indus
 	- Supporting universities and research institutions with high-quality weather datasets.
 	
 By continuously improving and expanding its capabilities, ClimaSync has the potential to become a key component in various industries, delivering real-time, reliable, and structured meteorological data for informed decision-making.
+
+#Maintainers
+
+[@JoaoFXs](https://github.com/JoaoFXs).
+
+## Contributing
+
+- Feel free to dive in! [Open an issue](https://github.com/JoaoFXs/climasync/issues) or submit PRs.
+- Climasync follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
+
+### Contributors
+
+This project exists thanks to all the people who contribute. 
+[![Contributors](https://contributors-img.web.app/image?repo=JoaoFXs/climasync)](https://github.com/JoaoFXs/climasync/graphs/contributors)
+
+
+
+## License
+
+[MIT](LICENSE) © JoaoFXs
