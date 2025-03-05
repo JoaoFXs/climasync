@@ -57,6 +57,6 @@ With this, you will have a container running with the following images:
 
 With everything installed and Docker running, just access ClimaSync-app and you will see that the application is running. It is very important that you enter the locations you want to view, separated by commas, this way the integration will make a call for each location, as configured in the config. Soon after, you will be able to see the integration running in the terminal itself:
 
-![terminal example](caminho/para/imagem.png)
+![terminal example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/static/terminal.JPG)
 
 
