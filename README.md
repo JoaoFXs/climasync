@@ -13,6 +13,8 @@ This data is processed, validated, and stored in a database and ActiveMQ queues,
   - [Data Transformation and Validation](#data-transformation-and-validation)
   - [Error Handling](#error-handling)
   - [Log Viewing](#log-viewing)
+- [Conclusion](#conclusion)
+  - [Potential Applications](#potencial-applications)
   
 ## Background
 
@@ -134,10 +136,11 @@ To view the logs in Grafana, simply follow the installation steps in the usage s
 ![logs](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/static/logs.JPG)
 
 
-#Conclusion
+## Conclusion
+
 The ClimaSync platform provides a robust and scalable solution for capturing, processing, and distributing meteorological data. By leveraging Apache Camel, ActiveMQ, MySQL, and Resilience4j, the integration ensures high availability, data integrity, and efficient processing of weather information.
 
-##Potential Applications
+### Potential Applications
 
 ClimaSync can be adapted for a wide range of applications across different industries, including:
 1. Smart Cities & Urban Planning
