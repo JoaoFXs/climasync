@@ -7,7 +7,7 @@ This data is processed, validated, and stored in a database and ActiveMQ queues,
 ## Table of Contents
 
 - [Background](#background)
-- []
+- [Installation](#installation)
 
 
 ## Background
@@ -51,3 +51,4 @@ With this, you will have a container running with the following images:
 - Loki: Log collector and storage
 - Promtail: Log Collector for Loki
 - Grafana: Dashboards for data visualization. To view logs, register a DataSource in grafana for loki using the ip http://loki:3100. In [grafana](http://localhost:3000/connections/datasources/edit/ceeyacppo2x34f), use the user and pwd admin to access
+- ClimaSync-app: ClimaSync integration app generated from .jar
