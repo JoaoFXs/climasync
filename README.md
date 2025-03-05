@@ -51,8 +51,7 @@ With this, you will have a container running with the following images:
 - Loki: Log collector and storage
 - Promtail: Log Collector for Loki
 - Grafana: Dashboards for data visualization. To view logs, register a DataSource in grafana for loki using the ip http://loki:3100. In [grafana](http://localhost:3000/connections/datasources/edit/ceeyacppo2x34f), use the user and pwd admin to access
-- ClimaSync-app: ClimaSync integration app generated from .jar. Para configurar o application.properties, acesse o [a config] (https://github.com/JoaoFXs/climasync/blob/main/config/application.properties). Com esse arquivo, você conseguirá configurar diversas configurações, como localizações (location) e scheduling (period.timer)
-
+- ClimaSync-app: ClimaSync integration app generated from .jar. To configure application.properties, access [a config](https://github.com/JoaoFXs/climasync/blob/main/config/application.properties). With this file, you will be able to configure several settings, such as locations (location) and scheduling (period.timer)
 
 ## Installation
 
