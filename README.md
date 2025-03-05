@@ -45,6 +45,6 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 With this, you will have a container running with the following images:
-- MySQL Database: The necessary configuration, such as database and table creation, are already found in the [a init.sql](#https://github.com/JoaoFXs/climasync/tree/main/src/main/resources/sql) file.
+- MySQL Database: The necessary configuration, such as database and table creation, are already found in the [a init.sql](https://github.com/JoaoFXs/climasync/tree/main/src/main/resources/sql) file.
 
 
