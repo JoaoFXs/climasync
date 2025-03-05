@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WeatherForecast>
+	<Header>
+		<Location_Information>
+			<Namelocation>Barueri</Namelocation>
+			<DetailLocation>Barueri, Região Imediata de São Paulo, Região Metropolitana de São Paulo, Região Geográfica Intermediária de São Paulo, São Paulo, Região Sudeste, Brasil</DetailLocation>
+			<Timezone>GMT</Timezone>
+			<Latitude>-23.5</Latitude>
+			<Longitude>-46.875</Longitude>
+		</Location_Information>
+	</Header>
+	<Daily>
+		<Time>2025-03-05</Time>
+		<SunInformation>
+			<Sunrise>2025-03-05T09:05:00</Sunrise>
+			<Sunset>2025-03-05T21:32:00</Sunset>
+			<SunshineDuration>39600.00</SunshineDuration>
+			<DaylightDuration>44861.49</DaylightDuration>
+			<ApparentTemperatureMin>22.6</ApparentTemperatureMin>
+		</SunInformation>
+		<WeatherInformation>
+			<ApparentTemperatureMin>22.6</ApparentTemperatureMin>
+			<ApparentTemperatureMax>31.0</ApparentTemperatureMax>
+			<TemperatureMin>19.8</TemperatureMin>
+			<TemperatureMax>29.6</TemperatureMax>
+		</WeatherInformation>
+		<WindInformation>
+			<WindSpeedMax>16.1</WindSpeedMax>
+			<WindGustsMax>41.0</WindGustsMax>
+			<WindDirectionDominant>142</WindDirectionDominant>
+		</WindInformation>
+		<PrecipitationInformation>
+			<RainSum>0.00</RainSum>
+			<PrecipitationSum>0.20</PrecipitationSum>
+			<PrecipitationProbabilityMax>13</PrecipitationProbabilityMax>
+			<PrecipitationHours>1.0</PrecipitationHours>
+			<ShowerSum>0.20</ShowerSum>
+		</PrecipitationInformation>
+		<UVInformation>
+			<UvIndexMax>8.40</UvIndexMax>
+			<UvIndexClearSkyMax>8.95</UvIndexClearSkyMax>
+			<ShortWaveRadiationSum>19.50</ShortWaveRadiationSum>
+		</UVInformation>
+		<Others>
+			<Evapotranspiration>4.18</Evapotranspiration>
+			<SnowfallSum>0.00</SnowfallSum>
+		</Others>
+	</Daily>
+</WeatherForecast>
