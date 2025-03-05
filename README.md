@@ -9,7 +9,11 @@ This data is processed, validated, and stored in a database and ActiveMQ queues,
 - [Background](#background)
 - [Installation](#installation)
 - [Usage](#usage)
-
+  - [Consume Messages From ActiveMQ](#consume-messages-from-activemq)
+  - [Data Transformation and Validation](#data-transformation-and-validation)
+  - [Error Handling](#error-handling)
+  - [Log Viewing](#log-viewing)
+  
 ## Background
 
 The ClimaSync project integrates weather data from an external meteorological API, OpenMeteo API, to periodically collect essential climate information—including temperature, humidity, and weather forecasts. The data collection frequency is configurable in days through project properties, ensuring that the latest data is always retrieved. Developed with the Apache Camel framework, the integration is designed to be robust and scalable, enabling efficient message flow management.
