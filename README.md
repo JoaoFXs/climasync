@@ -45,6 +45,9 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 With this, you will have a container running with the following images:
-- MySQL Database: The necessary configuration, such as database and table creation, are already found in the [a init.sql](https://github.com/JoaoFXs/climasync/tree/main/src/main/resources/sql) file.
-
-
+- MySQL Database: The necessary configuration, such as database and table creation, are already found in the [a init.sql](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/sql/init.sql) file.
+- Adminer: Interface web para gerenciar o MySQL
+- ActiveMQ: Used for asynchronous communication between services. You can access the console with usr and pwd admin [a activemq](http://localhost:8161/admin/)
+- Loki: Log collector and storage
+- Promtail: Log Collector for Loki
+- Grafana: Dashboards for data visualization. To view logs, register a DataSource in grafana for loki using the ip http://loki:3100. In [grafana](http://localhost:3000/connections/datasources/edit/ceeyacppo2x34f), use the user and pwd admin to access
