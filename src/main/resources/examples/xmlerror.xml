@@ -1,0 +1,8 @@
+  <WeatherForecastResponse>
+	  <Body>
+	  		<Status>NOK</Status>
+	  		<ErrorCode>E003</ErrorCode>
+	  		<ErrorDescription>Connection error during integration - ${exception.message}</ErrorDescription>
+	  </Body>
+  </WeatherForecastResponse>
+  
