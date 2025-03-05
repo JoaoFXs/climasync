@@ -14,7 +14,7 @@ This data is processed, validated, and stored in a database and ActiveMQ queues,
   - [Error Handling](#error-handling)
   - [Log Viewing](#log-viewing)
 - [Conclusion](#conclusion)
-  - [Potential Applications](#potencial-applications)
+  - [Potential Applications](#potential-applications)
   
 ## Background
 
