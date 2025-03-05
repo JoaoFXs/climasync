@@ -66,3 +66,38 @@ In the image, it is possible to see several logs, where there are two cities. Fi
 - [XML Success Example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/examples/xmlsucess.xml) for Barueri localization
 - [XML Error Example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/examples/xmlerror.xml) for Connection Error
 
+For possible errors, two different types of techniques were implemented.
+- Redelivery: It is possible to configure "n" attempts in case of an error, using the original message. Aimed at connection errors with external APIs and generic errors. In this option, the integration will stop after the delivery attempts:
+```java
+   onException(SchemaValidationException.class)
+            .handled(true)
+            .useOriginalMessage()
+            .maximumRedeliveries(redeliveryCount)
+            .redeliveryDelay(redeliveryDelay)
+            .useOriginalMessage()
+            .toD(ConfigBroker.JMSQUEUE.queue(queueRedelivery))
+            .log(Logs.E003.message("Message Validation Error - ${exception.message}"))
+            .setProperty("status").simple("NOK")
+            .setProperty("errorCode").simple("E003")
+            .setProperty("errorDescription").simple("Connection error during integration - ${exception.message}")
+            .setBody().simple("<root></root>")
+            .to(ToolBoxEnum.XSLT.file("ErrorXml.xslt"))
+            .toD(ConfigBroker.JMSQUEUE.queue(queueError));
+```
+
+- Resilience4j: For use as a circuit breaker, which opens the circuit when 50% of the calls fail, considering the last 10 requests. Used only to cut the connection with MySql. Since the messages are already saved in ActiveMQ, this option was inserted so as not to stop the integration completely, and log that the connection with MySql did not work:
+
+```java
+   from("direct:insertDatabase")
+        .routeId("insertDatabase")
+        .circuitBreaker()
+            .resilience4jConfiguration()
+                .failureRateThreshold(50)  // Opens the circuit if 50% of calls fail
+                .slidingWindowSize(10)     // Considers the last 10 requests
+                .waitDurationInOpenState(20000) // Wait 20s before trying again
+            .end()
+            .bean(CallDataBase.class, "insertSixteenDayForecastTable")
+        .onFallback()
+            .log("ERROR002 - Error accessing database, please try again later")
+        .end();
+```
