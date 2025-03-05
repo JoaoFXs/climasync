@@ -59,4 +59,9 @@ With everything installed and Docker running, just access ClimaSync-app and you 
 
 ![terminal example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/static/terminal.JPG)
 
+In the image, it is possible to see several logs, where there are two cities. First, a validation is performed on the message through the [XSD](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/validator/WeatherForecast.xsd) file where, after processing the message captured from the API using a [XSLT](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/schema/RenderXML.xslt), it performs the validation of how this message construction is expected to be. It is then sent to the AMQ queues of each location, where the future consumer can access them asynchronously. Queues are created automatically when messages are sent and can be viewed in the activemq dashboard. There are queues for both sent messages and possible errors, captured by camel handler.
+
+![activemq portal](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/static/activemq.JPG)
+
+
 
