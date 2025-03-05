@@ -64,7 +64,16 @@ In the image, it is possible to see several logs, where there are two cities. Fi
 
 ![activemq portal](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/static/activemq.JPG)
 
+### Data Transformation and Validation
+Data transformation and validation are essential steps to ensure the integrity and compliance of information received from external sources, such as the Open Meteo API. When consuming data from external APIs, it is common for responses to be in formats such as JSON or XML, which can be unstructured or contain irrelevant information.
+In the specific case of the Open Meteo API, the JSON response for a one-day weather forecast can be long and contain several fields that are not always necessary for the application. To deal with this complexity, an effective approach was to convert the JSON to XML, a format that allows for a clearer hierarchical structure and makes data manipulation easier.
+After conversion to XML, transformations could be applied using XSLT (Extensible Stylesheet Language Transformations). XSLT is a language designed to transform XML documents into other formats, such as XML, HTML or plain text. In the aforementioned context, two XSLT transformations are applied:
 
+- RenderXML.xslt (https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/schema/RenderXML.xslt): This transformation is responsible for structuring and formatting the XML data in a way that meets the specific requirements of the application, preparing it for the subsequent processing steps. From this file, it was possible to structure the message as follows, with data on the location and the weather data for each day.
+- RemoveNulls.xslt (https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/schema/RemoveNulls.xslt): After rendering, it is common for the XML to contain elements or attributes with null or empty values. This transformation removes these unnecessary elements, reducing the size of the document and eliminating irrelevant information.
+- ErrorXml.xslt (https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/schema/ErrorXML.xslt): Error message transformation;
+
+These transformations ensure that the data is clean, structured and ready for validation.
 - [XML Success Example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/examples/xmlsucess.xml) for Barueri localization
 - [XML Error Example](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/examples/xmlerror.xml) for Connection Error
 
@@ -119,4 +128,5 @@ For monitoring and analyzing the logs, the Promtail, Loki, and Grafana stack was
 To view the logs in Grafana, simply follow the installation steps in the usage section. Then use the query {job="camel_logs"}
 
 ![logs](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/static/logs.JPG)
+
 
