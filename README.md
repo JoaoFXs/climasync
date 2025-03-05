@@ -45,14 +45,18 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 With this, you will have a container running with the following images:
-- MySQL Database: The necessary configuration, such as database and table creation, are already found in the [a init.sql](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/sql/init.sql) file.
+- MySQL Database: The necessary configuration, such as database and table creation, are already found in the [init.sql](https://github.com/JoaoFXs/climasync/blob/main/src/main/resources/sql/init.sql) file.
 - Adminer: Interface web para gerenciar o MySQL
-- ActiveMQ: Used for asynchronous communication between services. You can access the console with usr and pwd admin [a activemq](http://localhost:8161/admin/)
+- ActiveMQ: Used for asynchronous communication between services. You can access the console with usr and pwd admin [activemq](http://localhost:8161/admin/)
 - Loki: Log collector and storage
 - Promtail: Log Collector for Loki
 - Grafana: Dashboards for data visualization. To view logs, register a DataSource in grafana for loki using the ip http://loki:3100. In [grafana](http://localhost:3000/connections/datasources/edit/ceeyacppo2x34f), use the user and pwd admin to access
-- ClimaSync-app: ClimaSync integration app generated from .jar. To configure application.properties, access [a config](https://github.com/JoaoFXs/climasync/blob/main/config/application.properties). With this file, you will be able to configure several settings, such as locations (location) and scheduling (period.timer)
+- ClimaSync-app: ClimaSync integration app generated from .jar. To configure application.properties, access [config](https://github.com/JoaoFXs/climasync/blob/main/config/application.properties). With this file, you will be able to configure several settings, such as locations (location) and scheduling (period.timer)
 
-## Installation
+## Usage
+
+With everything installed and Docker running, just access ClimaSync-app and you will see that the application is running. It is very important that you enter the locations you want to view, separated by commas, this way the integration will make a call for each location, as configured in the config. Soon after, you will be able to see the integration running in the terminal itself:
+
+![terminal example](caminho/para/imagem.png)
 
 
