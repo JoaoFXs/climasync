@@ -1,4 +1,5 @@
 # ClimaSync - Integration Platform for Meteorological Data Capture and Distribution
+![GitHub contributors](https://img.shields.io/github/contributors/JoaoFXs/climasync)
 
 
 ClimaSync is an integration platform developed with Apache Camel, designed to capture weather data from an external API (OpenWeather) and efficiently distribute it to consumer systems. By integrating with a weather API such as OpenMeteo, the platform collects crucial weather information, including temperature, humidity, and forecasts. 
@@ -184,7 +185,8 @@ By continuously improving and expanding its capabilities, ClimaSync has the pote
 
 ### Contributors
 
-This project exists thanks to all the people who contribute. 
+This project exists thanks to all the people who contribute.
+
 [![Contributors](https://contributors-img.web.app/image?repo=JoaoFXs/climasync)](https://github.com/JoaoFXs/climasync/graphs/contributors)
 
 
