@@ -1,5 +1,17 @@
 # ClimaSync - Integration Platform for Meteorological Data Capture and Distribution
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![ActiveMQ Version](https://img.shields.io/badge/ActiveMQ-3.18.0-brightgreen)
+![Apache Camel Version](https://img.shields.io/badge/Apache%20Camel-5.16.7-blue)
 ![GitHub contributors](https://img.shields.io/github/contributors/JoaoFXs/climasync)
+![License](https://img.shields.io/github/license/JoaoFXs/climasync)
+![Issues](https://img.shields.io/github/issues/JoaoFXs/climasync)
+![Project Status](https://img.shields.io/badge/Status-Finish-brightgreen)
+
+
+
+
+
 
 
 ClimaSync is an integration platform developed with Apache Camel, designed to capture weather data from an external API (OpenWeather) and efficiently distribute it to consumer systems. By integrating with a weather API such as OpenMeteo, the platform collects crucial weather information, including temperature, humidity, and forecasts. 
@@ -17,6 +29,9 @@ This data is processed, validated, and stored in a database and ActiveMQ queues,
 - [Conclusion](#conclusion)
   - [Potential Applications](#potential-applications)
 - [Maintainers](#maintainers)
+- [Contributing](#contributing)
+	- [Contributors](#contributors)
+- [License](#license)
 
 ## Background
 
